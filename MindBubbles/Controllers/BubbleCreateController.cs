@@ -16,15 +16,20 @@
         {
             return View();
         }
+        [HttpPost]
         public ActionResult BubbleCreate(BubbleCreateModel bubbleCreateModel)
         {
-
+            
             return View(CreateBubble(bubbleCreateModel));
 
-
         }
+
         public BubbleCreateModel CreateBubble(BubbleCreateModel bubbleCreateModel)
         {
+            if(bubbleCreateModel.BaseString == null)
+            {
+                bubbleCreateModel.BaseString = "Please enter at least one character into bubble";
+            }
             string[] converted;
             converted = bubbleCreateModel.BaseString.Split('*');
             bubbleCreateModel.BaseStringList = converted;
@@ -36,5 +41,7 @@
         {
             return View();
         }
+
+      
     }
 }

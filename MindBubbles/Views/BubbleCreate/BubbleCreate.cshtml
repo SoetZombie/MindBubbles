@@ -7,8 +7,10 @@
 }
 
 
-
-@foreach (var item in Model.BaseStringList)
-{
-    <span id="bubbles"> @item</span>
-}
+<div class="col-lg-12">
+    @foreach (var item in Model.BaseStringList)
+    {
+        <span id="bubbles"> @item</span>
+    }
+</div>
+<a class="btn btn-default back-to-input-btn" href="@Url.Action("InputSource", "BubbleCreate")"> Back to input</a>
