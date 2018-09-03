@@ -1,0 +1,17 @@
+﻿@model MindBubbles.Models.BubbleCreateModel
+
+@{
+    ViewBag.Title = "InputSource";
+}
+
+<body class="col-lg-12">
+    <h2>Prosím vložte text k předělání do bublin</h2>
+        
+    @using (Html.BeginForm("BubbleCreate", "BubbleCreate", FormMethod.Post))
+    {
+        @Html.TextAreaFor(m => m.BaseString, 10, 40, new { @class = "form-control form-control-lg"})
+
+        <input class="btn btn-default" type="submit" value="Submit" />
+    }
+
+</body>

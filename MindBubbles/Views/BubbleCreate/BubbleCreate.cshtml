@@ -1,0 +1,14 @@
+﻿@model MindBubbles.Models.BubbleCreateModel
+
+<link href="@Url.Content("~/Styles/Bubbles.css")" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "BubbleCreate";
+}
+
+
+
+@foreach (var item in Model.BaseStringList)
+{
+    <span id="bubbles"> @item</span>
+}
