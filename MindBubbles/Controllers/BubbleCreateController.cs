@@ -37,7 +37,7 @@
                 string transformedText;
 
                 rawText = item;
-                transformedText = new String(rawText.Where(c => c != '-' && (c < '0' || c > '9')).ToArray());
+                transformedText = new String(rawText.Where(c => c != '.' && (c < '0' || c > '9')).ToArray());
 
                 var number = regex.Matches(item)
                                   .Cast<Match>()
@@ -53,10 +53,16 @@
                 bubbleRawList.Add(bubbleToList);
 
             }
+            List<BubbleCreateModel> orderedList = new List<BubbleCreateModel>();
+            orderedList = bubbleRawList.OrderBy(p => p.OrderNumber).ToList();
+
             var listToReturn = new BubblesList
             {
-                AllBubbleData = bubbleRawList
-        };
+                AllBubbleData = orderedList
+        
+            };
+
+            
             return listToReturn;
          
         }
