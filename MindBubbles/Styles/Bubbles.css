@@ -1,10 +1,31 @@
 ﻿#bubbles {
     color: red;
     border: solid 1px;
-    display: inline-block;
-    width: 5em;
+    width: 16.6%;
 
 }
 .back-to-input-btn{
     margin-top: 8px;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.column {
+    float: left;
+    width: 18%;
+    margin: 1%;
+    text-align: center;
+    border: solid 1px;
+    border-color: #b2ff59;
+    border-radius: 3px;
+    display: inline-block;
+    word-wrap: break-word;
+    padding: 0.1%;
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+    font-weight:300;
+}
+* {
+    box-sizing: border-box;
 }

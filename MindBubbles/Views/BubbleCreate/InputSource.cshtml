@@ -1,4 +1,4 @@
-﻿@model MindBubbles.Models.BubbleCreateModel
+﻿@model MindBubbles.Models.InputStringModel
 
 @{
     ViewBag.Title = "InputSource";
@@ -10,12 +10,11 @@
     @using (Html.BeginForm("BubbleCreate", "BubbleCreate", FormMethod.Post))
 
     {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        // @Html.AntiForgeryToken()
+        // @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.TextAreaFor(m => m.BaseString, 10, 40, new { @class = "form-control form-control-lg" })
-            @Html.ValidationMessageFor(model => model.BaseString, "", new { @class = "text-danger" })
+            @Html.TextAreaFor(model=> model.InputString , 10, 40, new {value = "kokots",@class = "form-control form-control-lg" })
         </div>
         <div class="form-group">
             <input class="btn btn-default" type="submit" value="Submit" />

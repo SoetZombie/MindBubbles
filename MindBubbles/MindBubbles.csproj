@@ -148,6 +148,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BubbleCreateModel.cs" />
+    <Compile Include="Models\BubblesList.cs" />
+    <Compile Include="Models\InputStringModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

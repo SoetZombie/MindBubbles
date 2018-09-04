@@ -12,6 +12,10 @@ namespace MindBubbles.Models
         [Required]
         public string BaseString { get; set; }
         public string[] BaseStringList { get; set; }
+        public string OrderNumber { get; set; }
+        public string PlainTextInCell { get; set; }
+        public string ParametersAfterText { get; set; }
+
 
     }
 }
