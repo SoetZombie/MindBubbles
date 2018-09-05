@@ -8,9 +8,42 @@
 
 <h2>BubbleCreate</h2>
 <div class="row">
-    @foreach (var item in       Model.AllBubbleData)
+    @{ var index = 0;}
+
+    <span class="columnHeading">@Model.List1[0].OrderNumber @Model.List1[0].PlainTextInCell</span>
+    <span class="columnHeading">@Model.List2[0].OrderNumber @Model.List2[0].PlainTextInCell</span>
+    <span class="columnHeading">@Model.List3[0].OrderNumber @Model.List3[0].PlainTextInCell</span>
+    </div>
+
+    @for (var i = 1; i <= 3; i++)
     {
-        <span class="column"> @item.PlainTextInCell</span>
+    <div class="row">
+        <div class="line1"></div>
+        <span class="column1">@Model.List1[i].OrderNumber @Model.List1[i].PlainTextInCell</span>
+
+        <div class="line2"></div>
+        <span class="column2">@Model.List2[i].OrderNumber @Model.List2[i].PlainTextInCell</span>
+            
+        <div class="line3"></div>
+        <span class="column3">@Model.List3[i].OrderNumber @Model.List3[i].PlainTextInCell</span>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script>
+        var height1, height2, height3, i;
+        i = @i-1;
+        height1 = ($('.column1:eq('+i+')').outerHeight(true) / 2) + 1;
+        $('.line1:eq('+i+')').css("height", height1);
+        console.log(height1);
+        height2 = ($('.column2:eq(' + i + ')').outerHeight(true) / 2)+1;
+        $('.line2:eq(' + i + ')').css("height", height2);
+        console.log(height2);
+        height3 = ($('.column3').outerHeight(true) / 2)+1;
+        $('.line3:eq(' + i + ')').css("height", height3);
+        console.log(height3);
+    </script>
+       
+
     }
-</div>
 <a class="btn btn-default back-to-input-btn" href="@Url.Action("InputSource", "BubbleCreate")"> Back to input</a>

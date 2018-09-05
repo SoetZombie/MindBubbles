@@ -12,9 +12,51 @@
     display: table;
     clear: both;
 }
-.column {
+.column1 {
     float: left;
-    width: 18%;
+    width: 25%;
+    margin: 1% 0% 1% 0%;
+    text-align: center;
+    border: solid 1px;
+    border-color: #b2ff59;
+    border-radius: 3px;
+    display: inline-block;
+    word-wrap: break-word;
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+    font-weight: 300;
+    margin-right: 2%;
+}
+.column2 {
+    float: left;
+    width: 25%;
+    margin: 1% 0% 1% 0%;
+    text-align: center;
+    border: solid 1px;
+    border-color: #b2ff59;
+    border-radius: 3px;
+    display: inline-block;
+    word-wrap: break-word;
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+    font-weight: 300;
+    margin-left: 0;
+    margin-right: 2%;
+}
+.column3 {
+    float: left;
+    width: 25%;
+    margin: 1% 0% 1% 0%;
+    text-align: center;
+    border: solid 1px;
+    border-color: #b2ff59;
+    border-radius: 3px;
+    display: inline-block;
+    word-wrap: break-word;
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+    font-weight: 300;
+}
+.columnHeading {
+    float: left;
+    width: 31%;
     margin: 1%;
     text-align: center;
     border: solid 1px;
@@ -22,10 +64,22 @@
     border-radius: 3px;
     display: inline-block;
     word-wrap: break-word;
-    padding: 0.1%;
     font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
-    font-weight:300;
+    font-weight: 300;
+    background-color: lightgreen;
 }
+  
+
+.line ,.line1, .line2, .line3 {
+    
+    margin-left:2%;
+    float: left;
+    width: 4%;
+    height: 25px;
+    vertical-align:middle;  
+    border-bottom: 1px solid;
+}
+
 * {
     box-sizing: border-box;
 }
