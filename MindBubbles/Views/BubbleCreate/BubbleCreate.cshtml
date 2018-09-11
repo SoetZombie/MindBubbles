@@ -7,32 +7,94 @@
 
 
 <h2>BubbleCreate</h2>
-<div class="row">
-    @{ var index = 0;}
-
-    <span class="columnHeading">@Model.List1[0].OrderNumber @Model.List1[0].PlainTextInCell</span>
-    <span class="columnHeading">@Model.List2[0].OrderNumber @Model.List2[0].PlainTextInCell</span>
-    <span class="columnHeading">@Model.List3[0].OrderNumber @Model.List3[0].PlainTextInCell</span>
-    </div>
-
-    @for (var i = 1; i <= 3; i++)
-    {
+<div class="bubble-container">
     <div class="row">
-        <div class="line1"></div>
-        <span class="column1">@Model.List1[i].OrderNumber @Model.List1[i].PlainTextInCell</span>
 
-        <div class="line2"></div>
-        <span class="column2">@Model.List2[i].OrderNumber @Model.List2[i].PlainTextInCell</span>
-            
-        <div class="line3"></div>
-        <span class="column3">@Model.List3[i].OrderNumber @Model.List3[i].PlainTextInCell</span>
+        <span class="column-heading">@Model.List1[0].OrderNumber @Model.List1[0].PlainTextInCell</span>
+        <span class="column-heading">@Model.List2[0].OrderNumber @Model.List2[0].PlainTextInCell</span>
+        <span class="column-heading">@Model.List3[0].OrderNumber @Model.List3[0].PlainTextInCell</span>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-    <script>
-        var height1, height2, height3, i;
-        i = @i-1;
+
+
+    <div class="row">
+
+        <div class="line-column"></div>
+        <div class="column">
+
+            @foreach (var item in Model.List1.Skip(1))
+            {
+                <div class="inner-line">
+                    <div class="line"></div>
+                    <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                </div>
+            }
+        </div>
+
+        <div class="line-column"></div>
+        <div class="column">
+
+            @foreach (var item in Model.List2.Skip(1))
+            {
+                <div class="inner-line">
+                    <div class="line"></div>
+                    <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                </div>
+            }
+        </div>
+
+        <div class="line-column"></div>
+        <div class="column">
+
+            @foreach (var item in Model.List3.Skip(1))
+            {
+                <div class="inner-line">
+                    <div class="line"></div>
+                    <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script>
+    function addHorizontalLines() {
+        let line, cell;
+        let element = $('.inner-line');
+        element.each(function (i, l) {
+
+            let line = $(l).children('.line');
+            let cell = $(l).children('.cell')
+
+            let heigth = (cell.outerHeight(true));
+            line.css('height', (heigth/2)+1);
+
+        });
+    }
+
+    function addVerticalLines() {
+        let column = $('.column');
+        let headings = $('.column-heading');
+        const rowHeight = $('.row').first().outerHeight(true);
+        column.each(function (i, l) {
+            let columnHeading = headings.eq(i);
+            console.log(headings);
+        let columnHeight = $(l).outerHeight(true);
+        let lastElHeight = $(l).find('.cell').last().outerHeight(true);
+        let finalHeight = (rowHeight - columnHeading.outerHeight(true)) + (columnHeight - lastElHeight / 2);
+
+            let line = $('.line-column:eq(' + i + ')');
+            line.css("height", finalHeight + 1);
+            line.css("margin-top", columnHeading.outerHeight(true) - rowHeight);
+
+        });
+    }
+    addVerticalLines();
+    addHorizontalLines();
+
+        @*var height1, height2, height3, i;
+        i = @i-1;w
         height1 = ($('.column1:eq('+i+')').outerHeight(true) / 2) + 1;
         $('.line1:eq('+i+')').css("height", height1);
         console.log(height1);
@@ -41,9 +103,10 @@
         console.log(height2);
         height3 = ($('.column3').outerHeight(true) / 2)+1;
         $('.line3:eq(' + i + ')').css("height", height3);
-        console.log(height3);
-    </script>
-       
+        console.log(height3);*@
+</script>
 
-    }
+
+
+
 <a class="btn btn-default back-to-input-btn" href="@Url.Action("InputSource", "BubbleCreate")"> Back to input</a>

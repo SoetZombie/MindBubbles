@@ -12,72 +12,61 @@
     display: table;
     clear: both;
 }
-.column1 {
+.column {
     float: left;
-    width: 25%;
-    margin: 1% 0% 1% 0%;
-    text-align: center;
-    border: solid 1px;
-    border-color: #b2ff59;
-    border-radius: 3px;
-    display: inline-block;
-    word-wrap: break-word;
-    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
-    font-weight: 300;
-    margin-right: 2%;
+    width: 29%;
+    margin: 2% 0 0 0;
 }
-.column2 {
+
+.line-column {
     float: left;
-    width: 25%;
-    margin: 1% 0% 1% 0%;
-    text-align: center;
-    border: solid 1px;
-    border-color: #b2ff59;
-    border-radius: 3px;
-    display: inline-block;
-    word-wrap: break-word;
-    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
-    font-weight: 300;
-    margin-left: 0;
-    margin-right: 2%;
+    border-right: 1px solid;
+    margin-left: 4%;
+    height:100px;
+    z-index:5;
+
 }
-.column3 {
-    float: left;
-    width: 25%;
-    margin: 1% 0% 1% 0%;
-    text-align: center;
-    border: solid 1px;
-    border-color: #b2ff59;
-    border-radius: 3px;
-    display: inline-block;
-    word-wrap: break-word;
-    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
-    font-weight: 300;
-}
-.columnHeading {
+.column-heading {
     float: left;
     width: 31%;
-    margin: 1%;
+    margin: 0 1% 0 1%;
+    padding: 16px 0 16px 0;
     text-align: center;
     border: solid 1px;
     border-color: #b2ff59;
     border-radius: 3px;
     display: inline-block;
     word-wrap: break-word;
-    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
-    font-weight: 300;
+    font-family: "Calibri Light", sans-serif;
+    font-weight: 600;
     background-color: lightgreen;
+    font-size: 18px;
+}
+.cell {
+    padding: 8px 0 8px 0;
+    margin: 1% 0% 1% 0%;
+    text-align: center;
+    border: solid 1.5px;
+    border-color: #b2ff59;
+    border-radius: 5px;
+    display: inline-block;
+    word-wrap: break-word;
+    font-family: "Calibri Light", sans-serif;
+    font-weight: lighter;
+    width: 90%;
 }
   
 
-.line ,.line1, .line2, .line3 {
+.line , .line2, .line3 {
     
-    margin-left:2%;
     float: left;
-    width: 4%;
-    height: 25px;
-    vertical-align:middle;  
+    width: 10%;
     border-bottom: 1px solid;
+}
+
+
+.inner-line {
+    position: relative;
 }
 
 * {
