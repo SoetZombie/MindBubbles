@@ -147,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logic\Logic.cs" />
     <Compile Include="Models\BubbleCreateModel.cs" />
     <Compile Include="Models\BubblesList.cs" />
     <Compile Include="Models\InputStringModel.cs" />
