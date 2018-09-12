@@ -8,51 +8,86 @@
 
 <h2>BubbleCreate</h2>
 <div class="bubble-container">
-    <div class="row">
-
-        <span class="column-heading">@Model.List1[0].OrderNumber @Model.List1[0].PlainTextInCell</span>
-        <span class="column-heading">@Model.List2[0].OrderNumber @Model.List2[0].PlainTextInCell</span>
-        <span class="column-heading">@Model.List3[0].OrderNumber @Model.List3[0].PlainTextInCell</span>
-    </div>
 
 
     <div class="row">
 
-        <div class="line-column"></div>
-        <div class="column">
+        @for (int i = 0; i < Model.TotalCellsNumber; i++)
+         {
 
-            @foreach (var item in Model.List1.Skip(1))
-            {
-                <div class="inner-line">
-                    <div class="line"></div>
-                    <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+
+            <div class="column-parent">
+                @{ var whatever = Model.ListArray[i].First().OrderNumber;}
+                <span class="column-heading">@Model.ListArray[i].First().OrderNumber @Model.ListArray[i].First().PlainTextInCell</span>
+                <div class="column">
+                    <div class="line-column"></div>
+
+                    @foreach (var item in Model.ListArray[i].Skip(1))
+                     {
+                        <div class="inner-line">
+                            <div class="line"></div>
+                            <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                        </div>
+                     }
                 </div>
-            }
-        </div>
+            </div>
+         }
+        @*<div class="column-parent">
+                <span class="column-heading">@Model.List2[0].OrderNumber @Model.List2[0].PlainTextInCell</span>
+                <div class="column">
+                <div class="line-column"></div>
 
-        <div class="line-column"></div>
-        <div class="column">
-
-            @foreach (var item in Model.List2.Skip(1))
-            {
-                <div class="inner-line">
-                    <div class="line"></div>
-                    <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                    @foreach (var item in Model.List2.Skip(1))
+                    {
+                        <div class="inner-line">
+                            <div class="line"></div>
+                            <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                        </div>
+                    }
                 </div>
-            }
-        </div>
+            </div>
+            <div class="column-parent">
+                <span class="column-heading">@Model.List3[0].OrderNumber @Model.List3[0].PlainTextInCell</span>
+                <div class="column">
+                <div class="line-column"></div>
 
-        <div class="line-column"></div>
-        <div class="column">
-
-            @foreach (var item in Model.List3.Skip(1))
-            {
-                <div class="inner-line">
-                    <div class="line"></div>
-                    <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                    @foreach (var item in Model.List3.Skip(1))
+                     {
+                        <div class="inner-line">
+                            <div class="line"></div>
+                            <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                        </div>
+                     }
                 </div>
-            }
-        </div>
+            </div>
+            <div class="column-parent">
+                <span class="column-heading">@Model.List4[0].OrderNumber @Model.List4[0].PlainTextInCell</span>
+                <div class="column">
+                <div class="line-column"></div>
+
+                    @foreach (var item in Model.List4.Skip(1))
+                     {
+                        <div class="inner-line">
+                            <div class="line"></div>
+                            <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                        </div>
+                     }
+                </div>
+            </div>
+            <div class="column-parent">
+                <span class="column-heading">@Model.List5[0].OrderNumber @Model.List5[0].PlainTextInCell</span>
+                <div class="column">
+                <div class="line-column"></div>
+
+                    @foreach (var item in Model.List5.Skip(1))
+                     {
+                        <div class="inner-line">
+                            <div class="line"></div>
+                            <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                        </div>
+                     }
+                </div>
+            </div>*@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -75,18 +110,15 @@
 
     function addVerticalLines() {
         let column = $('.column');
-        let headings = $('.column-heading');
         const rowHeight = $('.row').first().outerHeight(true);
         column.each(function (i, l) {
-            let columnHeading = headings.eq(i);
-            console.log(headings);
         let columnHeight = $(l).outerHeight(true);
-        let lastElHeight = $(l).find('.cell').last().outerHeight(true);
-        let finalHeight = (rowHeight - columnHeading.outerHeight(true)) + (columnHeight - lastElHeight / 2);
+            let lastElHeight = $(l).find('.cell').last().outerHeight(true);
+            let finalHeight = (columnHeight - lastElHeight/2);
 
             let line = $('.line-column:eq(' + i + ')');
             line.css("height", finalHeight + 1);
-            line.css("margin-top", columnHeading.outerHeight(true) - rowHeight);
+
 
         });
     }

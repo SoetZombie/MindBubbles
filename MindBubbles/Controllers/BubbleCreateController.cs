@@ -13,6 +13,8 @@
         private const string BubbleString = "bublina1*bublina2*bublina3*bublina4";
         private List<BubbleCreateModel> bubbleRawList;
         public string BaseString;
+        public int cellsNumber;
+        
         public ActionResult Index()
         {
             return View();
@@ -20,8 +22,8 @@
         [HttpPost]
         public ActionResult BubbleCreate(InputStringModel inputStringModel)
         {
-            inputStringModel.InputString = "1.  Rozvoj dopravy a dopravní infrastruktury obce | 2. Životní prostředí a území | 3. Územní rozvoj obce | 1.1 Zlepšit podmínkysv ramci rozvoje oblastního zatizeni a take odpadu | 2.1 Zlepšit stav | 3.1 Zlepšit psa | 1.2 Zlepsit mozek | 2.2 Zlepsit karla | 3.2 Zlepsit kone | 1.3 Dobudovat | 2.3 Mozek a ruka jdou na nakup myslim si ze maji malo kebabu a tak se bojim aby jim nebylo zle | 3.3 nevim uz";
-            
+            inputStringModel.InputString = "1.  Rozvoj dopravy a dopravní infrastruktury obce | 2. Životní prostředí a území | 3. Územní rozvoj obce | 1.1 Zlepšit podmínkysv ramci rozvoje oblastního zatizeni a take odpadu | 2.1 Zlepšit stav | 3.1 Zlepšit psa | 1.2 Zlepsit mozek | 2.2 Zlepsit karla | 3.2 Zlepsit kone | 1.3 Dobudovat | 2.3 Mozek a ruka jdou na nakup myslim si ze maji malo kebabu a tak se bojim aby jim nebylo zle | 3.3 nevim uz| 4.1 Zlepšit stav | 5.1 Zlepšit psa | 4.2 Zlepsit mozek | 5.2 Zlepsit karla | 4.3 Dobudovat | 5.3 Mozek a ruka jdou na nakup myslim si ze maji malo kebabu a tak se bojim aby jim nebylo zle | 4 Zlepšit stav | 5 Zlepšit psa  ";
+
             return View(CreateBubbles(inputStringModel));
 
         }
@@ -46,7 +48,8 @@
                 var bubbleToList = new BubbleCreateModel()
                 {
                     PlainTextInCell = transformedText,
-                    OrderNumber = " "+number
+                    OrderNumber = " " + number
+
 
                 };
 
@@ -55,41 +58,33 @@
             }
             List<BubbleCreateModel> orderedList = new List<BubbleCreateModel>();
             orderedList = bubbleRawList.OrderBy(p => p.OrderNumber).ToList();
+            var highestNumber = orderedList.Last().OrderNumber;
 
-            var listToReturn = new BubblesList
-            {
-                AllBubbleData = orderedList
-        
-            };
+            cellsNumber = Int32.Parse(Regex.Match(highestNumber, @" \d+").ToString());
 
-            
-            return GenerateLists(listToReturn);
-         
+            return GenerateLists(orderedList);
+
         }
 
-        public BubblesList GenerateLists (BubblesList bubblesList )
+        public BubblesList GenerateLists(List<BubbleCreateModel> bubbleCreateModels)
         {
-            var regex1 = new Regex(@" 1+(\.\d+)+");
-            var regex2 = new Regex(@" 2+(\.\d+)+");
-            var regex3 = new Regex(@" 3+(\.\d+)+");
-            var regex4 = new Regex(@" 4+(\.\d+)+");
-            var regex5 = new Regex(@" 5+(\.\d+)+");
-            var regex6 = new Regex(@" 6+(\.\d+)+");
 
-            bubblesList.AllLists = new List<List<BubbleCreateModel>>();
-            bubblesList.List1 = bubblesList.AllBubbleData.Where(a => regex1.IsMatch(a.OrderNumber) || a.OrderNumber.Equals(" 1")).ToList();
-            bubblesList.List2 = bubblesList.AllBubbleData.Where(a => regex2.IsMatch(a.OrderNumber) || a.OrderNumber.Equals(" 2")).ToList();
-            bubblesList.List3 = bubblesList.AllBubbleData.Where(a => regex3.IsMatch(a.OrderNumber) || a.OrderNumber.Equals(" 3")).ToList();
-            
-            //bubblesList.List4 = bubblesList.AllBubbleData.Where(a => regex4.IsMatch(a.OrderNumber) || a.OrderNumber.Equals(" 4")).ToList();
-           // bubblesList.List5 = bubblesList.AllBubbleData.Where(a => regex5.IsMatch(a.OrderNumber) || a.OrderNumber.Equals(" 5")).ToList();
-            //bubblesList.List6 = bubblesList.AllBubbleData.Where(a => regex6.IsMatch(a.OrderNumber) || a.OrderNumber.Equals(" 6")).ToList();
+            var filterRegex = "";
+            List<BubbleCreateModel>[] listsArray = new List<BubbleCreateModel>[cellsNumber];
+            for (int i = 0; i < cellsNumber; i++)
+            {
+                filterRegex = i.ToString();
+                var regexDotPattern = new Regex($@" {i+1}(\.\d+)*");
 
-            bubblesList.AllLists.Add(bubblesList.List1);
-            bubblesList.AllLists.Add(bubblesList.List2);
-            bubblesList.AllLists.Add(bubblesList.List3);
-         
-            return bubblesList;
+                listsArray[i] = bubbleCreateModels.Where(a => regexDotPattern.IsMatch(a.OrderNumber)).ToList();
+            }
+
+
+            return new BubblesList
+            {
+                ListArray = listsArray,
+                TotalCellsNumber = cellsNumber
+            };
 
         }
 
@@ -99,6 +94,6 @@
             return View();
         }
 
-      
+
     }
 }

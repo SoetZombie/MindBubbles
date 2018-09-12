@@ -12,39 +12,50 @@
     display: table;
     clear: both;
 }
+
 .column {
     float: left;
-    width: 29%;
-    margin: 2% 0 0 0;
+    margin: 0% 1% 0 0;
+    width:80%;
+}
+.column-parent {
+    display: inline-block;
+    width: 18%;
+    vertical-align:top;
 }
 
 .line-column {
     float: left;
     border-right: 1px solid;
-    margin-left: 4%;
     height:100px;
-    z-index:5;
+    margin-left: 12%;
+    
 
 }
-.column-heading {
+.column-heading {/*Width shouldn't be changed under any circumstances*/
     float: left;
-    width: 31%;
     margin: 0 1% 0 1%;
-    padding: 16px 0 16px 0;
+    width: 90%;
+    padding: 8px 0 8px 0;
     text-align: center;
+    height: 5em;
+    vertical-align: middle;
     border: solid 1px;
     border-color: #b2ff59;
-    border-radius: 3px;
-    display: inline-block;
+    border-radius: 8px;
     word-wrap: break-word;
     font-family: "Calibri Light", sans-serif;
     font-weight: 600;
     background-color: lightgreen;
     font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
 }
 .cell {
-    padding: 8px 0 8px 0;
-    margin: 1% 0% 1% 0%;
+    padding: 8px 4px 8px 4px;
+    margin: 8% 0% 1% 0%;
     text-align: center;
     border: solid 1.5px;
     border-color: #b2ff59;
@@ -53,14 +64,14 @@
     word-wrap: break-word;
     font-family: "Calibri Light", sans-serif;
     font-weight: lighter;
-    width: 90%;
+    width: 75%;
 }
   
 
 .line , .line2, .line3 {
     
     float: left;
-    width: 10%;
+    width: 12%;
     border-bottom: 1px solid;
 }
 
