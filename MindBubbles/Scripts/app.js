@@ -1,6 +1,8 @@
-﻿function addHorizontalLines() {
-    let line, cell;
+﻿//number2 after variables means 2nd level variable - inner inner one.
+function addHorizontalLines() {
+    let line, cell, line2, cell2;
     let element = $('.inner-line');
+    let element2 = $('.inner-line2')
     element.each(function (i, l) {
 
         let line = $(l).children('.line');
@@ -10,12 +12,20 @@
         line.css('height', (heigth / 2));
 
     });
+    element2.each(function (i, l) {
+
+        let line2 = $(l).children('.line2');
+        let cell2 = $(l).children('.cell2')
+
+        let heigth2 = (cell2.outerHeight(true));
+        line2.css('height', (heigth2 / 2));
+
+    });
 }
 
 function addVerticalLines() {
     let column = $('.column');
     let finalHeight;
-    const rowHeight = $('.row').first().outerHeight(true);
     column.each(function (i, l) {
         let columnHeight = $(l).outerHeight(true);
         let lastElHeight = $(l).find('.cell').last().outerHeight(true);
@@ -28,16 +38,28 @@ function addVerticalLines() {
         } 
         let line = $('.line-column:eq(' + i + ')');
         line.css("height", finalHeight);
-        console.log(finalHeight);
-        console.log(columnHeight);
-        console.log(lastElHeight);
     });
-    
+    // inner inner verticals add - keeping in one method for simplicity
+    let column2 = $('.column2');
+    let finalHeight2;
+    column2.each(function (i, l) {
+        let columnHeight2 = $(l).outerHeight(true);
+        let lastElHeight2 = $(l).find('.cell2').last().outerHeight(true);
+
+        if ($(l).find('.cell2').length === 1) {
+            finalHeight2 = lastElHeight2 / 2;
+        }
+        else {
+            finalHeight2 = (columnHeight2 - lastElHeight2 / 2);
+        }
+        let line2 = $('.line-column2:eq(' + i + ')');
+        line2.css("height", finalHeight2);
+    });
 }
 
 function calculateLayout() {
     let divider = $(".column-heading").length;
-
+    if (divider > 6) { divider = 6 };
     $('.column-parent').css('width', `${90 / divider}%`);
 }
 

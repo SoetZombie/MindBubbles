@@ -22,7 +22,7 @@
     <div class="color-picker color-picker-blue" data-color="#5b9bd5"></div>
     <div class="color-picker color-picker-green" data-color="#a9d18e"></div>
     <div class="color-picker color-picker-red" data-color="#e85570"></div>
-    </div>
+</div>
 
 
 <div class="bubble-container">
@@ -33,9 +33,7 @@
         @for (int i = 0; i < Model.TotalCellsNumber; i++)
         {
 
-
             <div class="column-parent ">
-                @{ var whatever = Model.ListArray[i].First().OrderNumber;}
                 <span class="column-heading color-change">@Model.ListArray[i].First().OrderNumber. @Model.ListArray[i].First().PlainTextInCell</span>
                 <div class="column">
                     <div class="line-column color-change"></div>
@@ -45,6 +43,21 @@
                         <div class="inner-line">
                             <div class="line color-change"></div>
                             <span class="cell color-change">@item.OrderNumber @item.PlainTextInCell</span>
+                            @if (item.ThirdLevelList.Any())
+                             {
+                            <div class="column2">
+                            <div class="line-column2 color-change"></div>
+
+                                @foreach (var itm in item.ThirdLevelList)
+                                 {
+
+                                    <div class="inner-line2">
+                                        <div class="line2 color-change"></div>
+                                        <span class="cell2 color-change">@itm.OrderNumber @itm.PlainTextInCell</span>
+                                    </div>
+                                 }
+                            </div>
+                             }
                         </div>
                     }
                 </div>

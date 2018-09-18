@@ -10,10 +10,23 @@ namespace MindBubbles.Logic
     {
         private List<BubbleCreateModel> bubbleRawList;
         private List<BubbleCreateModel> headings;
+        private List<BubbleCreateModel> sortedHeadings;
 
+
+        public List<BubbleCreateModel>[] listsArray;
         public int cellsNumber;
+        //creates raw list without any order or sort
+        public BubblesList GenerateBubbles(InputStringModel inputStringModel)
+        {
+            CreateRawList(inputStringModel);
+            return new BubblesList
+            {
+                ListArray = listsArray,
+                TotalCellsNumber = cellsNumber
+            };
+        }
 
-        public BubblesList CreateBubbles(InputStringModel inputStringModel)
+        public void CreateRawList(InputStringModel inputStringModel)
         {
             bubbleRawList = new List<BubbleCreateModel>();
             headings = new List<BubbleCreateModel>();
@@ -33,20 +46,22 @@ namespace MindBubbles.Logic
                 {
                     PlainTextInCell = transformedText,
                     OrderNumber = " " + number
-
-
                 };
 
                 bubbleRawList.Add(bubbleToList);
-
             }
-            List<BubbleCreateModel> orderedList = new List<BubbleCreateModel>();
-            orderedList = bubbleRawList.OrderBy(p => p.OrderNumber).ToList();
-            var highestNumber = orderedList.Last().OrderNumber;
 
-            foreach (var item in bubbleRawList )
+            OrderList(bubbleRawList);
+        }
+
+        public void OrderList(List<BubbleCreateModel> bubbleCreateModels)
+        {
+            List<BubbleCreateModel> orderedList = new List<BubbleCreateModel>();
+            orderedList = bubbleCreateModels;
+
+            foreach (var item in bubbleRawList)
             {
-              var isHeading = int.TryParse(item.OrderNumber, out int n);
+                var isHeading = int.TryParse(item.OrderNumber, out int n);
                 if (isHeading)
                 {
                     headings.Add(item);
@@ -55,15 +70,18 @@ namespace MindBubbles.Logic
             }
             cellsNumber = headings.Count();
 
-            return GenerateLists(orderedList);
+            foreach (var item in orderedList)
+            {
+                item.ThirdLevelList = new List<BubbleCreateModel>();
+            }
 
+            GenerateListsForEachColumn(orderedList);
         }
 
-        public BubblesList GenerateLists(List<BubbleCreateModel> bubbleCreateModels)
+        public void GenerateListsForEachColumn(List<BubbleCreateModel> bubbleCreateModels)
         {
-
             var filterRegex = "";
-            List<BubbleCreateModel>[] listsArray = new List<BubbleCreateModel>[cellsNumber];
+            listsArray = new List<BubbleCreateModel>[cellsNumber];
             for (int i = 0; i < cellsNumber; i++)
             {
                 filterRegex = i.ToString();
@@ -71,15 +89,16 @@ namespace MindBubbles.Logic
                 var regexDotPattern = new Regex($@"{headings[i].OrderNumber}(\.\d+)?$");
 
                 listsArray[i] = bubbleCreateModels.Where(a => regexDotPattern.IsMatch(a.OrderNumber)).ToList();
+
+                var thirdLevelRegex = new Regex($@"{headings[i].OrderNumber}(\.\d+){{2}}$");
+                var thirdLevelsList = bubbleCreateModels.Where(b => thirdLevelRegex.IsMatch(b.OrderNumber)).ToList();
+                foreach (var itm in thirdLevelsList)
+                {
+                    var parentExpression = Regex.Match(itm.OrderNumber, @" \d+.*(?=\.)").ToString();
+                    var parentObject = listsArray[i].First(o => o.OrderNumber == parentExpression);
+                    parentObject.ThirdLevelList.Add(itm);
+                }
             }
-
-
-            return new BubblesList
-            {
-                ListArray = listsArray,
-                TotalCellsNumber = cellsNumber
-            };
-
         }
     }
 }
