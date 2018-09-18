@@ -15,6 +15,7 @@ namespace MindBubbles.Models
         public string OrderNumber { get; set; }
         public string PlainTextInCell { get; set; }
         public string ParametersAfterText { get; set; }
+        public List<BubbleCreateModel> ThirdLevelList { get; set; }
 
 
     }

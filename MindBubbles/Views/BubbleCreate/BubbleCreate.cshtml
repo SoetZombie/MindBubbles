@@ -4,85 +4,56 @@
     ViewBag.Title = "BubbleCreate";
 }
 <link href="@Url.Content("~/Styles/Bubbles.css")" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="~/Scripts/app.js"></script>
+<div class="correction-control">
+    <label class="px-correction control-label">Enter column order number with the 1px error</label>
+    <div>
+        <input type="number" id="px-correction" class="px-correction" />
+        <button class="btn btn-default correction-button-plus"> Přidej! </button>
+        <button class="btn btn-default correction-button-"> Uber! </button>
+
+    </div>
+</div>
+<div class="color-picker-heading">Choose your colour!</div>
+<div class="color-pickers">
+    <div class="color-picker color-picker-blue" data-color="#5b9bd5"></div>
+    <div class="color-picker color-picker-green" data-color="#a9d18e"></div>
+    <div class="color-picker color-picker-red" data-color="#e85570"></div>
+    </div>
 
 
-<h2>BubbleCreate</h2>
 <div class="bubble-container">
 
 
     <div class="row">
 
         @for (int i = 0; i < Model.TotalCellsNumber; i++)
-         {
+        {
 
 
-            <div class="column-parent">
+            <div class="column-parent ">
                 @{ var whatever = Model.ListArray[i].First().OrderNumber;}
-                <span class="column-heading">@Model.ListArray[i].First().OrderNumber. @Model.ListArray[i].First().PlainTextInCell</span>
+                <span class="column-heading color-change">@Model.ListArray[i].First().OrderNumber. @Model.ListArray[i].First().PlainTextInCell</span>
                 <div class="column">
-                    <div class="line-column"></div>
+                    <div class="line-column color-change"></div>
 
                     @foreach (var item in Model.ListArray[i].Skip(1))
-                     {
+                    {
                         <div class="inner-line">
-                            <div class="line"></div>
-                            <span class="cell">@item.OrderNumber @item.PlainTextInCell</span>
+                            <div class="line color-change"></div>
+                            <span class="cell color-change">@item.OrderNumber @item.PlainTextInCell</span>
                         </div>
-                     }
+                    }
                 </div>
             </div>
-         }
-     
+        }
+
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-<script>
-    function addHorizontalLines() {
-        let line, cell;
-        let element = $('.inner-line');
-        element.each(function (i, l) {
 
-            let line = $(l).children('.line');
-            let cell = $(l).children('.cell')
-
-            let heigth = (cell.outerHeight(true));
-            line.css('height', (heigth / 2) + 1);
-            console.log(heigth);
-
-        });
-    }
-
-    function addVerticalLines() {
-        let column = $('.column');
-        const rowHeight = $('.row').first().outerHeight(true);
-        column.each(function (i, l) {
-        let columnHeight = $(l).outerHeight(true);
-            let lastElHeight = $(l).find('.cell').last().outerHeight(true);
-            let finalHeight = (columnHeight - lastElHeight/2);
-
-            let line = $('.line-column:eq(' + i + ')');
-            line.css("height", finalHeight + 1);
-
-
-        });
-    }
-    addVerticalLines();
-    addHorizontalLines();
-
-        @*var height1, height2, height3, i;
-        i = @i-1;w
-        height1 = ($('.column1:eq('+i+')').outerHeight(true) / 2) + 1;
-        $('.line1:eq('+i+')').css("height", height1);
-        console.log(height1);
-        height2 = ($('.column2:eq(' + i + ')').outerHeight(true) / 2)+1;
-        $('.line2:eq(' + i + ')').css("height", height2);
-        console.log(height2);
-        height3 = ($('.column3').outerHeight(true) / 2)+1;
-        $('.line3:eq(' + i + ')').css("height", height3);
-        console.log(height3);*@
-</script>
 
 
 

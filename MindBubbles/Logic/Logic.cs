@@ -9,11 +9,15 @@ namespace MindBubbles.Logic
     public class Logic
     {
         private List<BubbleCreateModel> bubbleRawList;
+        private List<BubbleCreateModel> headings;
+
         public int cellsNumber;
 
         public BubblesList CreateBubbles(InputStringModel inputStringModel)
         {
             bubbleRawList = new List<BubbleCreateModel>();
+            headings = new List<BubbleCreateModel>();
+
             string[] splittedArray = inputStringModel.InputString.Split('|');
             var regex = new Regex(@"\d+(\.\d+)*");
             foreach (var item in splittedArray)
@@ -40,7 +44,16 @@ namespace MindBubbles.Logic
             orderedList = bubbleRawList.OrderBy(p => p.OrderNumber).ToList();
             var highestNumber = orderedList.Last().OrderNumber;
 
-            cellsNumber = Int32.Parse(Regex.Match(highestNumber, @" \d+").ToString());
+            foreach (var item in bubbleRawList )
+            {
+              var isHeading = int.TryParse(item.OrderNumber, out int n);
+                if (isHeading)
+                {
+                    headings.Add(item);
+                }
+
+            }
+            cellsNumber = headings.Count();
 
             return GenerateLists(orderedList);
 
@@ -54,7 +67,8 @@ namespace MindBubbles.Logic
             for (int i = 0; i < cellsNumber; i++)
             {
                 filterRegex = i.ToString();
-                var regexDotPattern = new Regex($@" {i + 1}(\.\d+)*");
+                // if you decide to remove space from a = a.ordernumber use ^ to make sure regex will take only numbers related i.e if you have 1 it won't take 11 and so on
+                var regexDotPattern = new Regex($@"{headings[i].OrderNumber}(\.\d+)?$");
 
                 listsArray[i] = bubbleCreateModels.Where(a => regexDotPattern.IsMatch(a.OrderNumber)).ToList();
             }
