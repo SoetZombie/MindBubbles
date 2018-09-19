@@ -165,6 +165,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="SampleXLSX\Akcni plan_2 monitoring_FINAL %281%29.xlsm" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

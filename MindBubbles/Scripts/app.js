@@ -28,10 +28,18 @@ function addVerticalLines() {
     let finalHeight;
     column.each(function (i, l) {
         let columnHeight = $(l).outerHeight(true);
-        let lastElHeight = $(l).find('.cell').last().outerHeight(true);
+        let lastCell = $(l).find('.cell').last();
+        let lastInnerLine = $(l).find('.inner-line').last();
+
+        let lastElHeight = lastCell.outerHeight(true);
         
         if ($(l).find('.cell').length === 1) {
             finalHeight = lastElHeight / 2 + 12;
+        }
+        if (lastInnerLine.children('.column2').length > 0) {
+            console.log('a');
+            let lastInnerLineHeight = lastInnerLine.find('.column2').outerHeight(true);
+            finalHeight = (columnHeight - lastInnerLineHeight - lastElHeight / 2);
         }
         else {
             finalHeight = (columnHeight - lastElHeight / 2);

@@ -33,24 +33,27 @@ namespace MindBubbles.Logic
 
             string[] splittedArray = inputStringModel.InputString.Split('|');
             var regex = new Regex(@"\d+(\.\d+)*");
+
             foreach (var item in splittedArray)
             {
-                string transformedText;
-                transformedText = new String(item.Where(c => c != '.' && (c < '0' || c > '9')).ToArray());
-
-                var number = regex.Matches(item)
-                                  .Cast<Match>()
-                                  .Select(match => match.Value)
-                                  .First();
-                var bubbleToList = new BubbleCreateModel()
+                if (item != "")
                 {
-                    PlainTextInCell = transformedText,
-                    OrderNumber = " " + number
-                };
+                    string transformedText;
+                    transformedText = new String(item.Where(c => c != '.' && (c < '0' || c > '9')).ToArray());
 
-                bubbleRawList.Add(bubbleToList);
+                    var number = regex.Matches(item)
+                                      .Cast<Match>()
+                                      .Select(match => match.Value)
+                                      .First();
+                    var bubbleToList = new BubbleCreateModel()
+                    {
+                        PlainTextInCell = transformedText,
+                        OrderNumber = " " + number
+                    };
+
+                    bubbleRawList.Add(bubbleToList);
+                }
             }
-
             OrderList(bubbleRawList);
         }
 
