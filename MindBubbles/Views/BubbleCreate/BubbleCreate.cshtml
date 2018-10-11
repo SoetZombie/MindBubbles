@@ -1,15 +1,13 @@
 ﻿@model MindBubbles.Models.BubblesList
 
 @{
-                ViewBag.Title = "BubbleCreate";
+    ViewBag.Title = "BubbleCreate";
 }
 <link href="@Url.Content("~/Styles/Bubbles.css")" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 <script src="~/Scripts/app.js"></script>
-<script src="~/Scripts/html2canvas.js"></script>
-
 <div class="correction-control">
     <label class="px-correction control-label">Enter column order number with the 1px error</label>
     <div>
@@ -21,17 +19,16 @@
 </div>
 <div class="color-picker-heading">Choose your colour!</div>
 <div class="color-pickers">
-    <div class="color-picker color-picker-blue" data-color="#8faadc"></div>
+    <div class="color-picker color-picker-blue" data-color="#5b9bd5"></div>
     <div class="color-picker color-picker-green" data-color="#a9d18e"></div>
     <div class="color-picker color-picker-red" data-color="#e85570"></div>
 </div>
-<div class="btn btn-default fulscreen-toggle">Toggle fullscreen</div>
 
 
 <div class="bubble-container">
 
 
-    <div id="canvas" class="row">
+    <div class="row">
 
         @for (int i = 0; i < Model.TotalCellsNumber; i++)
         {
@@ -47,20 +44,20 @@
                             <div class="line color-change"></div>
                             <span class="cell color-change">@item.OrderNumber @item.PlainTextInCell</span>
                             @if (item.ThirdLevelList.Any())
-                            {
-                                <div class="column2">
-                                    <div class="line-column2 color-change"></div>
+                             {
+                            <div class="column2">
+                            <div class="line-column2 color-change"></div>
 
-                                    @foreach (var itm in item.ThirdLevelList)
-                                    {
+                                @foreach (var itm in item.ThirdLevelList)
+                                 {
 
-                                        <div class="inner-line2">
-                                            <div class="line2 color-change"></div>
-                                            <span class="cell2 color-change">@itm.OrderNumber @itm.PlainTextInCell</span>
-                                        </div>
-                                    }
-                                </div>
-                            }
+                                    <div class="inner-line2">
+                                        <div class="line2 color-change"></div>
+                                        <span class="cell2 color-change">@itm.OrderNumber @itm.PlainTextInCell</span>
+                                    </div>
+                                 }
+                            </div>
+                             }
                         </div>
                     }
                 </div>
@@ -75,27 +72,3 @@
 
 
 <a class="btn btn-default back-to-input-btn" href="@Url.Action("InputSource", "BubbleCreate")"> Back to input</a>
-<a class="btn btn-default print-png"> Print PNG</a>
-<script type="text/javascript">
-        var img;
-    function PostImage() {
-        var id = @Model.DbId;
-        html2canvas($('#canvas')[0], {
-            scale: 2
-        }).then(function (canvas) {
-            img = canvas.toDataURL();
-            $.ajax({
-                type: 'POST',
-                url: "../BubbleCreate/PostImage",
-                data: { 'id': id, 'img': img },
-                success: function (data) { alert(data) },
-                error: function (a, jqXHR, exception) { }
-            })
-            console.log(img);
-        });
-        var myVar = 1;
-       
-    }
-
-     
-</script>

@@ -11,14 +11,13 @@ namespace MindBubbles.Logic
         private List<BubbleCreateModel> bubbleRawList;
         private List<BubbleCreateModel> headings;
         private List<BubbleCreateModel> sortedHeadings;
-        private bool thirdLevel;
+
 
         public List<BubbleCreateModel>[] listsArray;
         public int cellsNumber;
         //creates raw list without any order or sort
         public BubblesList GenerateBubbles(InputStringModel inputStringModel)
         {
-            thirdLevel = inputStringModel.ThirdLevel;
             CreateRawList(inputStringModel);
             return new BubblesList
             {
@@ -45,7 +44,7 @@ namespace MindBubbles.Logic
                     var number = regex.Matches(item)
                                       .Cast<Match>()
                                       .Select(match => match.Value)
-                                      .FirstOrDefault(); // changed first to firstordefault in order to prevent crashes when wrong sequences are entered.
+                                      .First();
                     var bubbleToList = new BubbleCreateModel()
                     {
                         PlainTextInCell = transformedText,
@@ -96,14 +95,11 @@ namespace MindBubbles.Logic
 
                 var thirdLevelRegex = new Regex($@"{headings[i].OrderNumber}(\.\d+){{2}}$");
                 var thirdLevelsList = bubbleCreateModels.Where(b => thirdLevelRegex.IsMatch(b.OrderNumber)).ToList();
-                if (thirdLevel)
+                foreach (var itm in thirdLevelsList)
                 {
-                    foreach (var itm in thirdLevelsList)
-                    {
-                        var parentExpression = Regex.Match(itm.OrderNumber, @" \d+.*(?=\.)").ToString();
-                        var parentObject = listsArray[i].First(o => o.OrderNumber == parentExpression);
-                        parentObject.ThirdLevelList.Add(itm);
-                    }
+                    var parentExpression = Regex.Match(itm.OrderNumber, @" \d+.*(?=\.)").ToString();
+                    var parentObject = listsArray[i].First(o => o.OrderNumber == parentExpression);
+                    parentObject.ThirdLevelList.Add(itm);
                 }
             }
         }

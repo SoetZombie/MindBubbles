@@ -1,15 +1,11 @@
 ﻿
-#canvas{
-    padding:16px;
-}
-
-.back-to-input-btn, .print-png {
+.back-to-input-btn {
     margin-top: 8px;
 }
 
 .row:after {
     content: "";
-    display: table; 
+    display: table;
     clear: both;
 }
 
@@ -31,27 +27,23 @@
     float: left;
     border-right: 1px solid;
     height: 100px;
-    margin-left: 8%;
+    margin-left: 12%;
     border-color: #a9d18e;
 }
 .line-column2 {
     float: left;
     border-right: 1px solid;
-    margin-left: 8%;
+    margin-left: 12%;
     border-color: #a9d18e;
-}
-.fulscreen-toggle{
-    margin: 12px;
 }
 
 .column-heading { /*Width shouldn't be changed under any circumstances*/
     float: left;
     margin: 0 1% 0 1%;
     width: 90%;
-    padding: 8px;
-    margin-top:16px;
+    padding: 8px 0 8px 0;
     text-align: center;
-    min-height: 5em;
+    height: 5em;
     vertical-align: middle;
     border: solid 1px;
     border-color: #a9d18e;
@@ -60,7 +52,7 @@
     font-family: "Calibri Light", sans-serif;
     font-weight: 300;
     background-color: #a9d18e;
-    font-size: 15px;
+    font-size: 18px;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -70,7 +62,7 @@
 
 .cell {
     padding: 4px 2px 4px 2px;
-    margin: 2px 0% 0 0%;
+    margin: 0 0% 0% 0%;
     text-align: left;
     border: solid 1px;
     border-color: #a9d18e;
@@ -78,7 +70,8 @@
     display: inline-block;
     word-wrap: break-word;
     font-family: "Calibri Light", sans-serif;
-    width: 85%;
+    font-weight: lighter;
+    width: 75%;
 }
 .cell2 {
     padding: 4px 2px 4px 2px;
@@ -93,14 +86,12 @@
     font-weight: lighter;
     width: 75%;
 }
-.cell,.cell2{
-    font-size: 11.2px;
-}
+
 
 
 .line {
     float: left;
-    width: 6%;
+    width: 8%;
     border-bottom: 1px solid;
     border-color: #a9d18e;
 
@@ -138,7 +129,6 @@
     display: inline-block;
     float: left;
     margin: 8px 4px 8px 4px;
-    border:1px solid;
     
 }
 
@@ -146,7 +136,7 @@
     background-color: #e85570;
 }
 .color-picker-blue {
-    background-color: #8faadc;
+    background-color: #5b9bd5;
 }
 .color-picker-green {
     background-color: #a9d18e;
@@ -162,7 +152,4 @@
     content: "";
     display: table;
     clear: both;
-}
-.bubble-container{
-    margin:0;
 }
