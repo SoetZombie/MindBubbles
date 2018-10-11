@@ -13,5 +13,7 @@ namespace MindBubbles.Models
         public List<BubbleCreateModel>[] ListArray { get; set; }
 
         public int TotalCellsNumber { get; set; }
+
+        public int DbId { get; set; }
     }
 }

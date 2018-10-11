@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LightInject;
+using MindBubbles.Service.Implementations;
+using MindBubbles.Service.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +19,12 @@ namespace MindBubbles
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            var container = new ServiceContainer();
+            container.RegisterControllers();
+            //register other services
+            container.Register<IBubbleService, BubbleService>(new PerScopeLifetime());
+
+            container.EnableMvc();
         }
     }
 }

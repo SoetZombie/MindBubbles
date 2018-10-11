@@ -1,36 +1,64 @@
-﻿using MindBubbles.Models;
+﻿namespace MindBubbles.Service.Implementations
+{
+    using MindBubbles.Context;
+    using MindBubbles.Models;
+using MindBubbles.Service.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+    using System.Data.Entity;
+    using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace MindBubbles.Logic
-{
-    public class Logic
+    public class BubbleService : IBubbleService
     {
-        private List<BubbleCreateModel> bubbleRawList;
-        private List<BubbleCreateModel> headings;
-        private List<BubbleCreateModel> sortedHeadings;
+        private DatabaseContext db = new DatabaseContext();
+        private List<BubbleCreateModel> bubbleRawList, headings, orderedList;
         private bool thirdLevel;
-
         public List<BubbleCreateModel>[] listsArray;
         public int cellsNumber;
-        //creates raw list without any order or sort
+
+        public BubbleService()
+        {
+            bubbleRawList = new List<BubbleCreateModel>();
+            headings = new List<BubbleCreateModel>();
+            orderedList = new List<BubbleCreateModel>();
+
+        }
+
         public BubblesList GenerateBubbles(InputStringModel inputStringModel)
         {
             thirdLevel = inputStringModel.ThirdLevel;
             CreateRawList(inputStringModel);
+            db.ExistingBubbles.Add(new ExistingBubbles
+            {
+                ExistingInputString = inputStringModel.InputString 
+            });
+            db.SaveChanges();
+
             return new BubblesList
             {
                 ListArray = listsArray,
-                TotalCellsNumber = cellsNumber
+                TotalCellsNumber = cellsNumber,
+                DbId = FindLastId()
             };
+        }
+        public int FindLastId()
+        {
+            var ex = db.ExistingBubbles;
+            return ex.OrderByDescending(a => a.BubbleId).First().BubbleId;
+        }
+
+        public void AddImageToExistingBubble(int id, string image)
+        {
+            ExistingBubbles ex = db.ExistingBubbles.Find(id);
+            ex.ExistingImage = image;
+            db.Entry(ex).State = EntityState.Modified;
+            db.SaveChanges();
         }
 
         public void CreateRawList(InputStringModel inputStringModel)
         {
-            bubbleRawList = new List<BubbleCreateModel>();
-            headings = new List<BubbleCreateModel>();
+            
 
             string[] splittedArray = inputStringModel.InputString.Split('|');
             var regex = new Regex(@"\d+(\.\d+)*");
@@ -60,7 +88,6 @@ namespace MindBubbles.Logic
 
         public void OrderList(List<BubbleCreateModel> bubbleCreateModels)
         {
-            List<BubbleCreateModel> orderedList = new List<BubbleCreateModel>();
             orderedList = bubbleCreateModels;
 
             foreach (var item in bubbleRawList)
@@ -107,5 +134,6 @@ namespace MindBubbles.Logic
                 }
             }
         }
+
     }
 }

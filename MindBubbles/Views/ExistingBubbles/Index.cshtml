@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MindBubbles.Models.ExistingBubbles>
+
+
+<script src="~/Scripts/download.js"></script>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExistingImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExistingInputString)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-7">
+                <img class="img-responsive" src="@item.ExistingImage" />
+            </td>
+            <td class="col-md-3">
+                <textarea rows="8" class="form-control">@item.ExistingInputString</textarea>
+            </td>
+            <td class="col-md-2">
+               <a class="btn btn-danger" href="@Url.Action("Delete", new { id = item.BubbleId})">Delete</a>
+                <button class="btn btn-default" onclick="Download()">Download</button>
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+        function Download() {
+
+            download($('img').attr('src'), "Bubliny.png", "image/png");
+        }
+</script>
