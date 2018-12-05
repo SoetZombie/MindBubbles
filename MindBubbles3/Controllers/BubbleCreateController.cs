@@ -10,6 +10,7 @@
     using MindBubbles3.Logic;
     using MindBubbles3.Service.Interfaces;
     using System.Text;
+    using System.IO;
 
     public class BubbleCreateController : Controller
     {
@@ -27,7 +28,7 @@
         {
             return View();
         }
-        [Authorize]
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult BubbleCreate(InputStringModel inputStringModel)
         {
@@ -44,7 +45,13 @@
             }
 
         }
-        [Authorize]
+        [AllowAnonymous]
+        public FileResult DownloadXLSM()
+        {
+            return File(new FileStream(Server.MapPath("~/Content/Sample.xlsm"), FileMode.Open), "application/vnd.ms-excel.sheet.macroEnabled.12", "Sample.xlsm");
+
+        }
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult PostImage(int id, string img)
         {
@@ -53,7 +60,7 @@
         }
 
 
-        [Authorize]
+        [AllowAnonymous]
         public ActionResult InputSource()
         {
             if (ModelState.IsValid)

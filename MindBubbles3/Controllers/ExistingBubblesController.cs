@@ -6,14 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MindBubbles3.Context;
 using MindBubbles3.Models;
 
 namespace MindBubbles3.Controllers
 {
     public class ExistingBubblesController : Controller
     {
-        private DatabaseContext db = new DatabaseContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ExistingBubbles
         [Authorize]

@@ -136,12 +136,13 @@ namespace MindBubbles3.Controllers
 
         //
         // GET: /Account/Register
+        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
-        //
+        [AllowAnonymous]
         // POST: /Account/Register
         [HttpPost]
         [ValidateAntiForgeryToken]

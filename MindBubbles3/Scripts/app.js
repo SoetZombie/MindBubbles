@@ -195,6 +195,7 @@ $(document).ready(function () {
             $(v).css("border-color", color);
         });
         $('.column-heading').css("background-color", color);
+        PostImage();
 
     });
     $(".correction-button-plus").click(function () {

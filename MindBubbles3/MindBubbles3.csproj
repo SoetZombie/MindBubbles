@@ -198,7 +198,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Context\DatabaseContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BubbleCreateController.cs" />
     <Compile Include="Controllers\ExistingBubblesController.cs" />
@@ -208,7 +207,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logic\Logic.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BubbleCreateModel.cs" />
     <Compile Include="Models\BubblesList.cs" />
@@ -234,6 +232,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sample.xlsm" />
     <None Include="Properties\PublishProfiles\MindBubbles - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\MindBubbles - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\MindBubbles3 - FTP.pubxml" />
@@ -263,9 +262,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -289,9 +285,11 @@
     <Content Include="Views\BubbleCreate\BubbleCreate.cshtml" />
     <Content Include="Views\BubbleCreate\InputSource.cshtml" />
     <Content Include="Views\ExistingBubbles\Index.cshtml" />
+    <Content Include="Views\ExistingBubbles\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
